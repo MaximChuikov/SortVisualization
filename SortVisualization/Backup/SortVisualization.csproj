@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>D:\Repositories\SortVisualization\SortVisualization\Backup3\</UpgradeBackupLocation>
+    <OldToolsVersion>Current</OldToolsVersion>
+  </PropertyGroup>
+</Project>
