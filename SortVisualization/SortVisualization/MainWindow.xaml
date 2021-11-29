@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow"
         WindowState="Maximized"
-        Height="500"
-        Width="700">
+        MinHeight="350"
+        MinWidth="680">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -28,7 +28,8 @@
                 BorderThickness="3"
                 BorderBrush="Black"
                 CornerRadius="3">
-            <Canvas x:Name="canvas"/>
+            <Canvas x:Name="canvas"
+                    SizeChanged="canvas_SizeChanged"/>
         </Border>
 
         <Border Grid.Column="1"
@@ -36,14 +37,34 @@
                 BorderThickness="2"
                 BorderBrush="Black"
                 CornerRadius="3">
-            <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
                 <Label Content="Лог сравнений и перестановок"
                        FontSize="22"
                        FontWeight="DemiBold"
-                       Background="DarkSlateGray"/>
+                       Background="DarkSlateGray"
+                       Grid.Row="0"/>
 
+                <ScrollViewer Grid.Row="1"
+                              Name="scrollViewer">
+                    <ListView x:Name="logBox">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <Label Content="{Binding Path=FirstPhase}" Foreground="MediumVioletRed"/>
+                                    <Label Content="{Binding Path=SecondPhase}" Foreground="LawnGreen"/>
+                                    <Label Content="{Binding Path=ThirdPhase}" Foreground="Black"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollViewer>
                 
-            </StackPanel>
+            </Grid>
         </Border>
 
         <Border Grid.Column="1"
@@ -53,18 +74,32 @@
                 <Label Content="Скорость"
                        FontSize="15"/>
                 <Slider Minimum="10"
-                        Maximum="500"
-                        TickFrequency="1"
+                        Maximum="1010"
+                        TickFrequency="200"
                         TickPlacement="BottomRight"
                         Width="350"
                         Name="slider"/>
                 <Label Content="Алгоритм"
                        FontSize="15"/>
-                <ComboBox Height="Auto"
-                           VerticalContentAlignment="Center">
-                    <Label Content="Bubble sort"/>
+                <ComboBox Name="method"
+                          Height="Auto"
+                          VerticalContentAlignment="Center">
                     <Label Content="Shell sort"/>
+                    <Label Content="Quick sort"/>
                 </ComboBox>
+                <ComboBox Height="Auto"
+                          Name="case"
+                          VerticalContentAlignment="Center">
+                    <Label Content="Random filling"/>
+                    <Label Content="Worse case"/>
+                </ComboBox>
+                <Label Content="Длина"
+                       FontSize="15"/>
+                <TextBox  Name="lenght"
+                          KeyDown="TextBox_KeyDown"
+                          MinWidth="20"
+                          HorizontalContentAlignment="Center"
+                          VerticalContentAlignment="Center"/>
                 <Button Content="Начать"
                         Click="ButtonBegin"/>
             </StackPanel>
